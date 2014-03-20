@@ -1,0 +1,75 @@
+#import <Foundation/Foundation.h>
+#import <UIKit/UIAlertView.h>
+
+@interface SBAlertItem : NSObject <UIAlertViewDelegate> {
+	UIAlertView *_alertSheet;
+	BOOL _orderOverSBAlert;
+	BOOL _preventLockOver;
+	BOOL _didEverActivate;
+	BOOL _ignoreIfAlreadyDisplaying;
+	BOOL _didPlayPresentationSound;
+	BOOL _allowInSetup;
+	BOOL _pendInSetupIfNotAllowed;
+	BOOL _pendWhileKeyBagLocked;
+	NSArray *_allowedBundleIDs;
+	BOOL _allowInStark;
+}
+@property(assign, nonatomic) BOOL allowInStark;
+@property(retain, nonatomic) NSArray *allowedBundleIDs;
+@property(assign, nonatomic) BOOL pendWhileKeyBagLocked;
+@property(assign, nonatomic) BOOL pendInSetupIfNotAllowed;
+@property(assign, nonatomic) BOOL allowInSetup;
+@property(assign, nonatomic) BOOL ignoreIfAlreadyDisplaying;
+@property(assign) BOOL preventLockOver;
+@property(readonly, retain) UIAlertView *alertSheet;
+@property(readonly, assign) BOOL didPlayPresentationSound;
++ (id)_alertItemsController;
++ (void)activateAlertItem:(SBAlertItem *)item;
+- (void)dismiss:(int)dismiss;
+- (BOOL)dismissOnLock;
+- (id)prepareNewAlertSheetWithLockedState:(BOOL)lockedState requirePasscodeForActions:(BOOL)actions;
+- (BOOL)displayActionButtonOnLockScreen;
+- (int)alertPriority;
+- (BOOL)preventInterruption;
+- (BOOL)reappearsAfterUnlock;
+- (BOOL)reappearsAfterLock;
+- (BOOL)behavesSuperModally;
+- (id)alertItemNotificationSender;
+- (id)alertItemNotificationDate;
+- (int)alertItemNotificationType;
+- (void)noteVolumeOrLockPressed;
+- (void)didDeactivateForReason:(int)reason;
+- (void)willDeactivateForReason:(int)reason;
+- (void)didFailToActivate;
+- (void)screenWillUndim;
+- (void)willRelockForButtonPress:(BOOL)buttonPress;
+- (void)didActivate;
+- (void)willActivate;
+- (BOOL)_didEverActivate;
+- (void)setOrderOverSBAlert:(BOOL)alert;
+- (void)performUnlockAction;
+- (double)autoDismissInterval;
+- (id)shortLockLabel;
+- (id)lockLabel;
+- (void)playPresentationSound;
+- (BOOL)isCriticalAlert;
+- (BOOL)dismissOnModalDisplayActivation;
+- (BOOL)togglesMediaControls;
+- (int)unlockSource;
+- (BOOL)undimsScreen;
+- (BOOL)allowAutoUnlock;
+- (void)cleanPreviousConfiguration;
+- (void)buttonDismissed;
+- (BOOL)hasActiveKeyboardOnScreen;
+- (void)_playPresentationSound;
+- (Class)alertSheetClass;
+- (id)sound;
+- (void)dismiss;
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)index;
+- (void)configure:(BOOL)configure requirePasscodeForActions:(BOOL)actions;
+- (BOOL)forcesModalAlertAppearance;
+- (BOOL)unlocksScreen;
+- (BOOL)allowMenuButtonDismissal;
+- (BOOL)shouldShowInEmergencyCall;
+- (BOOL)shouldShowInLockScreen;
+@end
