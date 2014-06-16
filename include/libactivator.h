@@ -1,1 +1,0 @@
-libactivator/libactivator.h
